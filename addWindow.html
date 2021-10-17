@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <title>Add a Todo</title>
+</head>
+<body>
+    <div class="container">
+        <form>
+            <div>
+                <label>Enter task/todo</label>
+                <input type="text" id ='task' autofocus>
+            </div>
+            <button class="btn waves-effect waves-light" type="submit">Add Todo</button>
+        </form>
+    </div>
+
+    <script>
+        const electron = require('electron');
+        const {ipcRenderer} = electron
+
+        const submitForm = (e) => {
+            console.log('It Works :)')
+            e.preventDefault();
+            const item = document.querySelector('#task').value;
+            ipcRenderer.send('task:add', item);
+        }
+
+        const form = document.querySelector('form');
+        form.addEventListener('submit', submitForm)
+
+        
+    </script>
+</body>
+</html>
